@@ -1,0 +1,61 @@
+:root {
+  --point--color1: #fce8c3;
+  --point--color2: #f0002e;
+  --txt-color-400: #767676;
+  --txt-color-500: #121212;
+  --txt-color-600: #fff;
+}
+.exit_btn {
+  background-color: var(--point--color1);
+  border-radius: 5px;
+  padding: 5px 10px;
+  font-size: 14px;
+  border: none;
+
+}
+
+#chat2 .inputChat {
+  border-color: transparent;
+  width: 85%;
+}
+
+#chat2 .inputChat:focus {
+  border-color: transparent;
+  box-shadow: inset 0px 0px 0px 1px transparent;
+}
+
+.divider:after,
+.divider:before {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #eee;
+}
+
+/* 채팅 내역 - 스크롤, 높이지정 */
+.chatBody {
+  overflow-y: scroll;
+  position: relative;
+  height: 600px;
+}
+/* 보낸 메세지 */
+.chatMsg {
+  background-color: var(--point--color1);
+}
+
+.gap-custom {
+  gap: 0 15px;
+}
+
+.submit_btn {
+  width: 40px;
+  border: none;
+  background: var(--point--color1) url("/images/send.png") no-repeat center/80%;
+}
+
+.time {
+  /* 시간 텍스트 색상 */
+  font-size: 0.75rem;
+  letter-spacing: 0.02rem;
+  color: var(--txt-color-600);
+}
