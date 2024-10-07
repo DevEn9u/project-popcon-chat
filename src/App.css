@@ -6,14 +6,15 @@
   --txt-color-600: #fff;
 }
 .App {
+  margin: 0 auto;
+  padding: 0 20px;
   background: var(--txt-color-500);
+}
+.chatStart {
+  background: var(--txt-color-600);
 }
 #chat2 {
   background-color: var(--txt-color-500);
-}
-.App {
-  margin: 0 auto;
-  padding: 0 20px;
 }
 .start_tit {
   margin-top: 10px;
@@ -28,7 +29,7 @@ input[type=text] {
   border: 1px solid #eee;
   width: 120px;
   line-height: 40px;
-  background-color: #0d6efd;
-  color: #fff;
+  background-color: var(--point--color1);
+  color: var(--txt-color-500);
   font-weight: 700;
 }

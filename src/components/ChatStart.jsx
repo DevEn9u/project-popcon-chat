@@ -1,39 +1,36 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 
 function ChatStart() {
   const refRoom = useRef();
   const refId = useRef();
 
+  const [roomId, setRoomId] = useState("chat-");
+
   const openChatWin = () => {
     window.open(
-      // `/talk?roomId=${refRoom.current.value}&userId=${refId.current.value}`,
-      `/talk?roomId=test1234&userId=testroom`,
+      `#/chat?roomId=${refRoom.current.value}&userId=${refId.current.value}`,
       '',
-      'width=500, height=800'
+      'width=500, height=500'
     );
   };
 
   return (
-    <div>
-      <h2 className='start_tit'>대화명 만들기</h2>
+    <div className='chatStart'>
+      <h2 className="start_tit">대화명 만들기</h2>
       채팅방 이름 :{' '}
       <input
         type="text"
         name="roomId"
-        value="KIG_Chat"
+        value={roomId}
+        placeholder="채팅할 유저의 아이디"
         ref={refRoom}
-        readOnly
+        onChange={(e) => setRoomId(e.target.value)}
       />
       <br />
       대화명 :{' '}
-      <input
-        type="text"
-        name="userId"
-        placeholder="채팅방에서 사용할 이름"
-        ref={refId}
-      />
+      <input type="text" name="userId" value="admin" ref={refId} readOnly />
       <br />
-      <button type="button" onClick={openChatWin} className='start_btn'>
+      <button type="button" onClick={openChatWin} className="start_btn">
         채팅방 입장
       </button>
     </div>

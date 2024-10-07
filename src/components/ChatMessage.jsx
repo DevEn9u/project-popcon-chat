@@ -1,8 +1,8 @@
-import "./ChatMessage.css";
-import React, { useEffect, useRef, useState } from "react";
-import { useSearchParams } from "react-router-dom";
-import { realtime } from "../realtimeConfig";
-import { child, onValue, push, ref, set } from "firebase/database";
+import './ChatMessage.css';
+import React, { useEffect, useRef, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import { realtime } from '../realtimeConfig';
+import { child, onValue, push, ref, set } from 'firebase/database';
 
 // 스크롤을 맨 아래로 이동시키는 함수
 const scrollBottom = (chatWindow) => {
@@ -15,17 +15,17 @@ const scrollBottom = (chatWindow) => {
 const getCurrentDate = () => {
   const dateObj = new Date();
   const year = dateObj.getFullYear();
-  const month = ("0" + (dateObj.getMonth() + 1)).slice(-2);
-  const date = ("0" + dateObj.getDate()).slice(-2);
+  const month = ('0' + (dateObj.getMonth() + 1)).slice(-2);
+  const date = ('0' + dateObj.getDate()).slice(-2);
   // 요일 구하기
   const daysOfWeek = [
-    "일요일",
-    "월요일",
-    "화요일",
-    "수요일",
-    "목요일",
-    "금요일",
-    "토요일",
+    '일요일',
+    '월요일',
+    '화요일',
+    '수요일',
+    '목요일',
+    '금요일',
+    '토요일',
   ];
   const day = daysOfWeek[dateObj.getDay()];
   return `${year}년 ${month}월 ${date}일 ${day}`;
@@ -34,32 +34,33 @@ const getCurrentDate = () => {
 // 현재 시간 구하기 : HH:mm 형식
 const getCurrentTime = () => {
   const dateObj = new Date();
-  const hour = ("0" + dateObj.getHours()).slice(-2);
-  const minutes = ("0" + dateObj.getMinutes()).slice(-2);
+  const hour = ('0' + dateObj.getHours()).slice(-2);
+  const minutes = ('0' + dateObj.getMinutes()).slice(-2);
   return `${hour}:${minutes}`;
 };
 
-function ChatMessage({roomId, userId}) {
+function ChatMessage() {
+  // 파라미터 값 읽기
+  const [searchParams] = useSearchParams();
+  const roomId = searchParams.get('roomId');
+  const userId = searchParams.get('userId');
+
   console.log('Room ID:', roomId);
   console.log('User ID:', userId);
-  // 파라미터 값 읽기
-  // const [searchParams] = useSearchParams();
-  // const roomId = searchParams.get("roomId");
-  // const userId = searchParams.get("userId");
 
   const chatWindow = useRef();
-  const [chatData, setChatData] = useState("");
+  const [chatData, setChatData] = useState('');
 
   // 대화 보내기
   function sendMessage(chatRoom, chatId, chatMessage) {
-    const newKey = push(child(ref(realtime), "tempValue")).key;
-    set(ref(realtime, chatRoom + "/" + newKey), {
+    const newKey = push(child(ref(realtime), 'tempValue')).key;
+    set(ref(realtime, chatRoom + '/' + newKey), {
       id: chatId,
       message: chatMessage,
       date: getCurrentDate(),
       time: getCurrentTime(),
     });
-    console.log("메세지 입력 성공");
+    console.log('메세지 입력 성공');
   }
 
   // 대화(메세지 내역) 출력
@@ -68,8 +69,8 @@ function ChatMessage({roomId, userId}) {
     onValue(dbRef, (snapshot) => {
       // scrollBottom(chatWindow.current);
       let showDiv = []; // 대화 내용 및 날짜를 보여줄 div 를 배열 변수로
-      let previousDate = ""; // 이전 메세지의 날짜를 저장할 변수
-      let previousUser = ""; // 이전 메세지를 보낸 user를 저장할 변수
+      let previousDate = ''; // 이전 메세지의 날짜를 저장할 변수
+      let previousUser = ''; // 이전 메세지를 보낸 user를 저장할 변수
 
       snapshot.forEach((childSnapshot) => {
         const childData = childSnapshot.val();
@@ -86,7 +87,7 @@ function ChatMessage({roomId, userId}) {
                 <img
                   src="/chat/images/calendar.png"
                   alt="calendar"
-                  style={{ width: "1em", height: "1em", marginRight: "0.5rem" }}
+                  style={{ width: '1em', height: '1em', marginRight: '0.5rem' }}
                 />
                 <p className="time my-0 text-white">{messageDate}</p>
               </div>
@@ -115,10 +116,10 @@ function ChatMessage({roomId, userId}) {
                 <img
                   src="/chat/images/profile.jpg"
                   alt="profile"
-                  style={{ width: "45px", height: "100%", borderRadius: "50%"}}
+                  style={{ width: '45px', height: '100%', borderRadius: '50%' }}
                 />
               ) : (
-                <div style={{ width: "45px", height: "100%" }}></div> // 공백을 채울 div
+                <div style={{ width: '45px', height: '100%' }}></div> // 공백을 채울 div
               )}
             </div>
           );
@@ -135,10 +136,10 @@ function ChatMessage({roomId, userId}) {
                 <img
                   src="/chat/images/profile-admin.jpg"
                   alt="admin"
-                  style={{ width: "45px", height: "100%", borderRadius: "50%"}}
+                  style={{ width: '45px', height: '100%', borderRadius: '50%' }}
                 />
               ) : (
-                <div style={{ width: "45px", height: "100%" }}></div> // 공백을 채울 div
+                <div style={{ width: '45px', height: '100%' }}></div> // 공백을 채울 div
               )}
               <div>
                 <p className="small p-2 ms-3 mb-1 rounded-3 bg-body-tertiary">
@@ -194,19 +195,23 @@ function ChatMessage({roomId, userId}) {
                   <img
                     src="/chat/images/profile.jpg"
                     alt="profile"
-                    style={{ width: "45px", height: "100%", borderRadius: "50%"}}
+                    style={{
+                      width: '45px',
+                      height: '100%',
+                      borderRadius: '50%',
+                    }}
                   />
                   &nbsp;&nbsp;
                   <form
-                    style={{ width: "100%", display: "flex" }}
+                    style={{ width: '100%', display: 'flex' }}
                     onSubmit={(event) => {
                       event.preventDefault();
                       let message = event.target.message.value;
-                      if (message === "") {
+                      if (message === '') {
                         return;
                       }
                       sendMessage(roomId, userId, message);
-                      event.target.message.value = "";
+                      event.target.message.value = '';
                     }}
                   >
                     <input
@@ -215,9 +220,10 @@ function ChatMessage({roomId, userId}) {
                       className="inputChat form-control form-control-lg"
                     />
                     &nbsp;&nbsp;
-                    <button type="submit" className="submit_btn rounded-3">
-                      
-                    </button>
+                    <button
+                      type="submit"
+                      className="submit_btn rounded-3"
+                    ></button>
                   </form>
                 </div>
               </div>
