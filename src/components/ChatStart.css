@@ -1,0 +1,37 @@
+:root {
+  --point--color1: #fce8c3;
+  --point--color2: #f0002e;
+  --txt-color-400: #767676;
+  --txt-color-500: #121212;
+  --txt-color-600: #fff;
+}
+
+html {
+  background-color: var(--txt-color-500);
+}
+.inner {
+  display: flex;
+  flex-direction: column;
+}
+.chatStart {
+  display: inline-block;
+}
+.chatStart .input_wrap {
+  display: flex;
+  gap: 0 20px;
+  margin-bottom: 10px;
+  align-items: center;
+}
+.chatStart .input_wrap > p {
+  margin: 0;
+}
+.chatStart input[type="text"] {
+  background: var(--txt-color-500);
+  padding: 5px 10px;
+}
+.chatStart .input_wrap:nth-of-type(2) {
+  display: none;
+}
+.chatStart .start_btn {
+  margin-left: auto;
+}

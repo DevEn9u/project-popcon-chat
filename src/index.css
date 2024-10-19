@@ -5,3 +5,7 @@
   --txt-color-500: #121212;
   --txt-color-600: #fff;
 }
+
+* {
+  color: var(--txt-color-600);
+}

@@ -5,13 +5,13 @@
   --txt-color-500: #121212;
   --txt-color-600: #fff;
 }
+body {
+  overflow: hidden;
+}
 .App {
   margin: 0 auto;
   padding: 0 20px;
   background: var(--txt-color-500);
-}
-.chatStart {
-  background: var(--txt-color-600);
 }
 #chat2 {
   background-color: var(--txt-color-500);
@@ -19,7 +19,7 @@
 .start_tit {
   margin-top: 10px;
 }
-input[type=text] {
+input[type="text"] {
   border-radius: 5px;
   border: 1px solid #bbb;
   height: 40px;
